@@ -15,8 +15,6 @@ import { useForm } from "react-hook-form";
 
 import * as z from "ZOD";
 
-import { formSchema } from "@/app/(dashboard)/(routes)/conversation/constants";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useEffect, useState } from "react";
@@ -28,6 +26,8 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import ReactMarkdown from "react-markdown";
+
+import { formSchema } from "./constants";
 
 interface ConversationMessage {
     role: "user" | "model";
@@ -105,7 +105,7 @@ const CodePage = () => {
                         </div>
                     )}
                     {messages.length === 0 && !isLoading && (
-                        <Empty label="No conversation started." />
+                        <Empty label="No conversation started." src="/empty_code.png" />
                     )}
                     <div className="flex flex-col-reverse gap-y-4">
                         {messages.map((message, index) => (

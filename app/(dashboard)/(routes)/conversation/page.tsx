@@ -15,8 +15,6 @@ import { useForm } from "react-hook-form";
 
 import * as z from "ZOD";
 
-import { formSchema } from "@/app/(dashboard)/(routes)/conversation/constants";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useEffect, useState } from "react";
@@ -26,6 +24,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+
+import { formSchema } from "./constants";
 
 interface ConversationMessage {
     role: "user" | "model";
@@ -103,7 +103,7 @@ const ConversationPage = () => {
                         </div>
                     )}
                     {messages.length === 0 && !isLoading && (
-                        <Empty label="No conversation started." />
+                        <Empty label="No conversation started." src="/empty_conversation.png" />
                     )}
                     <div className="flex flex-col-reverse gap-y-4">
                         {messages.map((message, index) => (
