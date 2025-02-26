@@ -9,7 +9,7 @@ import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 
-import { MessageSquare } from "lucide-react";
+import { Code } from "lucide-react";
 
 import { useForm } from "react-hook-form";
 
@@ -27,12 +27,14 @@ import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
+import ReactMarkdown from "react-markdown";
+
 interface ConversationMessage {
     role: "user" | "model";
     parts: { text: string }[];
 }
 
-const ConversationPage = () => {
+const CodePage = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -49,7 +51,7 @@ const ConversationPage = () => {
         try {
             const userMessage: ConversationMessage = { role: "user", parts: [{ text: values.prompt }] };
 
-            const response = await axios.post("/api/conversation", { messages: messages, newMessage: values.prompt });
+            const response = await axios.post("/api/code", { messages: messages, newMessage: values.prompt });
 
             const botMessage: ConversationMessage = { role: "model", parts: [{ text: response.data }] };
 
@@ -78,7 +80,7 @@ const ConversationPage = () => {
 
     return (
         <div>
-            <Heading title="Conversation" description="Our most advanced conversation model." icon={MessageSquare} iconColor="text-violet-500" bgColor="bg-violet-500/10" />
+            <Heading title="Code Generation" description="Generate code using descriptive text." icon={Code} iconColor="text-green-700" bgColor="bg-green-700/10" />
             <div className="px-4 lg:px-8">
                 <div>
                     <Form {...form}>
@@ -86,7 +88,7 @@ const ConversationPage = () => {
                             <FormField name="prompt" render={({ field }) => (
                                 <FormItem className="col-span-12 lg:col-span-10">
                                     <FormControl className="m-0 p-0">
-                                        <Input className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="How do I calculate the radius of a circle?" {...field} />
+                                        <Input className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Simple toggle button using react hooks." {...field} />
                                     </FormControl>
                                 </FormItem>
                             )} />
@@ -109,9 +111,10 @@ const ConversationPage = () => {
                         {messages.map((message, index) => (
                             <div key={index} className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
                                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                                <p className="text-sm">
-                                    {typeof message.parts[0].text === "string" ? message.parts[0].text : "Invalid message"}
-                                </p>
+                                <ReactMarkdown>
+                                    {typeof message.parts[0].text === "string" ? message.parts[0].text || 
+                                    "" : "Invalid message"}
+                                </ReactMarkdown>
                             </div>
                         ))}
                     </div>
@@ -121,4 +124,4 @@ const ConversationPage = () => {
     )
 }
 
-export default ConversationPage;
+export default CodePage;
