@@ -1,4 +1,4 @@
-import * as z from "ZOD";
+import { z } from "zod";
 
 export const formSchema = z.object({
     prompt: z.string().min(1, {

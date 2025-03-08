@@ -6,10 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
-import { UserAvatar } from "@/components/user-avatar";
-import { BotAvatar } from "@/components/bot-avatar";
 
-import { Code } from "lucide-react";
+import { Music } from "lucide-react";
 
 import { useForm } from "react-hook-form";
 
@@ -23,18 +21,9 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { cn } from "@/lib/utils";
-
-import ReactMarkdown from "react-markdown";
-
 import { formSchema } from "./constants";
 
-interface ConversationMessage {
-    role: "user" | "model";
-    parts: { text: string }[];
-}
-
-const CodePage = () => {
+const MusicPage = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -45,17 +34,15 @@ const CodePage = () => {
     const isLoading = form.formState.isSubmitting;
 
     const router = useRouter();
-    const [messages, setMessages] = useState<ConversationMessage[]>([]);
+    const [trackUrl, setTrackUrl] = useState<string | undefined>("");
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: ConversationMessage = { role: "user", parts: [{ text: values.prompt }] };
+            setTrackUrl(undefined);
 
-            const response = await axios.post("/api/code", { messages: messages, newMessage: values.prompt });
+            const response = await axios.post("/api/music", values);
 
-            const botMessage: ConversationMessage = { role: "model", parts: [{ text: response.data }] };
-
-            setMessages((current) => [...current, userMessage, botMessage]);
+            setTrackUrl(response.data);
 
             form.reset();
         }
@@ -68,8 +55,6 @@ const CodePage = () => {
         }
     }
 
-    console.log(messages);
-
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -80,7 +65,7 @@ const CodePage = () => {
 
     return (
         <div>
-            <Heading title="Code Generation" description="Generate code using descriptive text." icon={Code} iconColor="text-green-700" bgColor="bg-green-700/10" />
+            <Heading title="Music Generation" description="Turn your prompt into music." icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10" />
             <div className="px-4 lg:px-8">
                 <div>
                     <Form {...form}>
@@ -88,7 +73,7 @@ const CodePage = () => {
                             <FormField name="prompt" render={({ field }) => (
                                 <FormItem className="col-span-12 lg:col-span-10">
                                     <FormControl className="m-0 p-0">
-                                        <Input className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Simple toggle button using react hooks." {...field} />
+                                        <Input className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Piano solo" {...field} />
                                     </FormControl>
                                 </FormItem>
                             )} />
@@ -104,24 +89,20 @@ const CodePage = () => {
                             <Loader />
                         </div>
                     )}
-                    {messages.length === 0 && !isLoading && (
-                        <Empty label="No conversation started." src="/empty_code.png" />
+                    {!trackUrl && !isLoading && (
+                        <Empty label="No music generated." src="/empty_music.png" />
                     )}
-                    <div className="flex flex-col-reverse gap-y-4">
-                        {messages.map((message, index) => (
-                            <div key={index} className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
-                                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                                <ReactMarkdown>
-                                    {typeof message.parts[0].text === "string" ? message.parts[0].text || 
-                                    "" : "Invalid message"}
-                                </ReactMarkdown>
-                            </div>
-                        ))}
-                    </div>
+                    {trackUrl && (
+                        <div>
+                        <audio controls className="w-full mt-8">
+                            <source src={trackUrl} />
+                        </audio>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     )
 }
 
-export default CodePage;
+export default MusicPage;

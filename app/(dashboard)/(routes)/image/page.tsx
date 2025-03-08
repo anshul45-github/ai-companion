@@ -13,7 +13,7 @@ import { Download, ImageIcon } from "lucide-react";
 
 import { useForm } from "react-hook-form";
 
-import * as z from "ZOD";
+import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -22,7 +22,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 import { amountOptions, formSchema, resolutionOptions } from "./constants";
 

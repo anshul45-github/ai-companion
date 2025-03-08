@@ -13,7 +13,7 @@ import { MessageSquare } from "lucide-react";
 
 import { useForm } from "react-hook-form";
 
-import * as z from "ZOD";
+import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -26,6 +26,8 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import { formSchema } from "./constants";
+
+import ReactMarkdown from "react-markdown";
 
 interface ConversationMessage {
     role: "user" | "model";
@@ -110,7 +112,9 @@ const ConversationPage = () => {
                             <div key={index} className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
                                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                                 <p className="text-sm">
-                                    {typeof message.parts[0].text === "string" ? message.parts[0].text : "Invalid message"}
+                                    <ReactMarkdown>
+                                        {typeof message.parts[0].text === "string" ? message.parts[0].text : "Invalid message"}
+                                    </ReactMarkdown>
                                 </p>
                             </div>
                         ))}
