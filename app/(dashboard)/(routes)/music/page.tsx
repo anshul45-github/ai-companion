@@ -23,7 +23,11 @@ import { useRouter } from "next/navigation";
 
 import { formSchema } from "./constants";
 
+import { useProModal } from "@/hooks/use-pro-modal";
+
 const MusicPage = () => {
+    const proModal = useProModal();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -47,8 +51,8 @@ const MusicPage = () => {
             form.reset();
         }
         catch(error) {
-            // TODO : Open pro modal
-            console.log(error);
+            if(axios.isAxiosError(error) && error.response?.status === 403)
+                proModal.onOpen();
         }
         finally {
             router.refresh();

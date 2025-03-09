@@ -1,8 +1,11 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+
 import { cn } from "@/lib/utils";
-import { ArrowRight, Code, ImageIcon, MessageSquare, Music, VideoIcon } from "lucide-react";
+
+import { ArrowRight, Code, ImageIcon, MessageSquare, Music } from "lucide-react";
+
 import { useRouter } from "next/navigation";
 
 const tools = [
@@ -34,7 +37,7 @@ const tools = [
     bgColor: "bg-green-700/10",
     href: "/code",
   }
-]
+];
 
 export default function DashboardPage() {
   const router = useRouter();
