@@ -47,4 +47,49 @@ This project reflects my passion for building innovative and user-friendly web a
 
 ## How to Explore the App
 
-The app is live and accessible at (https://ai-companion-ecru.vercel.app). Feel free to explore its features and functionality.
+The app is live and accessible at https://ai-companion-ecru.vercel.app. Feel free to explore its features and functionality.
+
+## Installation and Local Setup
+
+If you'd like to run the app locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/anshul45-github/ai-companion.git
+   cd ai-companion
+   ```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Set up environment variables**:
+   Create a **.env.local** file in the root directory and add the necessary environment variables. For example:
+   ```bash
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+   GEMINI_API_KEY=your_gemini_api_key
+   BEATOVEN_AI_API_KEY=your_beatoven_api_key
+   DATABASE_URL="your_mongodb_connection_string"
+   STRIPE_API_KEY=your_stripe_secret_key
+   NEXT_PUBLIC_APP_URL=your_localmachine_development_url
+   STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+   NEXT_PUBLIC_CRISP_ID="your_crisp_website_id"
+   ```
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+5. **Open the app**:
+   Visit **your_development_url** in your browser.
+
+## Contributions
+As this is a personal project, I am not actively seeking contributions. However, if you have suggestions, feedback, or ideas for improvement, feel free to open an issue on GitHub or reach out to me directly. I appreciate any input that can help make this project better!
+
+## Contact
+If you have any questions, would like to discuss this project further, or are interested in collaborating, please don't hesitate to reach out:
+- **Email**: anshulmendiratta10d@gmail.com
+- **Linkedin**: https://www.linkedin.com/in/anshul-mendiratta-a49b362b0/
