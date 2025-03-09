@@ -27,6 +27,8 @@ import { amountOptions, formSchema, resolutionOptions } from "./constants";
 
 import { useProModal } from "@/hooks/use-pro-modal";
 
+import toast from "react-hot-toast";
+
 const ImagePage = () => {
     const proModal = useProModal();
 
@@ -54,6 +56,8 @@ const ImagePage = () => {
         catch(error) {
             if(axios.isAxiosError(error) && error.response?.status === 403)
                 proModal.onOpen();
+            else
+                toast.error("An error occurred. Please try again later.");
         }
         finally {
             router.refresh();

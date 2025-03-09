@@ -31,6 +31,8 @@ import { formSchema } from "./constants";
 
 import { useProModal } from "@/hooks/use-pro-modal";
 
+import toast from "react-hot-toast";
+
 interface ConversationMessage {
     role: "user" | "model";
     parts: { text: string }[];
@@ -66,6 +68,8 @@ const CodePage = () => {
         catch(error) {
             if (axios.isAxiosError(error) && error.response?.status === 403)
                 proModal.onOpen();
+            else
+                toast.error("An error occurred. Please try again later.");
         }
         finally {
             router.refresh();
