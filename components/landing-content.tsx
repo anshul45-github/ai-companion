@@ -17,9 +17,9 @@ const testimonials = [
         description: "I was amazed by the AI's ability to create stunning visuals. The image generation tool is a game-changer for my projects!"
     },
     {
-        name: "Sneha Kapoor",
-        title: "Content Creator",
-        description: "The AI music generation tool is incredible! I use it to create background music for my videos, and it never disappoints."
+        name: "Radhika Rajput",
+        title: "Web Developer",
+        description: "I love discussing music with the chatbot—it's like having a virtual music buddy! Plus, the AI-generated music is super creative."
     }
 ];
 
