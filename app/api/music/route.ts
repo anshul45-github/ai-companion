@@ -1,3 +1,4 @@
+import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
 import axios from "axios";
 
 import { NextResponse } from "next/server";
@@ -62,6 +63,14 @@ const composeTrack = async (trackId: string) => {
 export async function POST(req: Request) {
     try {
         const { prompt } = await req.json();
+
+        if(!prompt)
+            return new NextResponse("Prompt is required", { status: 400 });
+
+        const freeTrial = await checkApiLimit();
+        
+        if(!freeTrial)
+            return new NextResponse("Free trial has expired", { status: 403 });
         try {
             const response = await axios.post('https://public-api.beatoven.ai/api/v1/tracks',
                 { prompt: { text: prompt } },
@@ -74,6 +83,7 @@ export async function POST(req: Request) {
             );
             const taskId = await composeTrack(response.data.tracks);
             const trackUrl = await getTrackUrl(taskId);
+            await increaseApiLimit();
             return new NextResponse(trackUrl, { status: 200 });
         }
         catch(error) {

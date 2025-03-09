@@ -111,11 +111,11 @@ const ConversationPage = () => {
                         {messages.map((message, index) => (
                             <div key={index} className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
                                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                                <p className="text-sm">
+                                <div className="text-sm">
                                     <ReactMarkdown>
                                         {typeof message.parts[0].text === "string" ? message.parts[0].text : "Invalid message"}
                                     </ReactMarkdown>
-                                </p>
+                                </div>
                             </div>
                         ))}
                     </div>

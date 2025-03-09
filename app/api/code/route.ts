@@ -1,3 +1,4 @@
+import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
 import { auth } from "@clerk/nextjs/server";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -28,8 +29,15 @@ export async function POST(req: Request) {
         if(!messages)
             return new NextResponse("Messages not provided", { status: 400 });
 
+        const freeTrial = await checkApiLimit();
+        
+        if(!freeTrial)
+            return new NextResponse("Free trial has expired", { status: 403 });
+
         const chat = model.startChat({ history: messages });
         const result = await chat.sendMessage(newMessage);
+
+        await increaseApiLimit();
 
         return NextResponse.json(result.response.text());
     }
