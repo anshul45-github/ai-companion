@@ -1,5 +1,8 @@
 import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
+
 import { auth } from "@clerk/nextjs/server";
+
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -21,8 +24,9 @@ export async function POST(req: Request) {
             return new NextResponse("Resolution is required", { status: 400 });
 
         const freeTrial = await checkApiLimit();
+        const isPro = await checkSubscription();
         
-        if(!freeTrial)
+        if(!freeTrial && !isPro)
             return new NextResponse("Free trial has expired", { status: 403 });
 
         const intAmount = parseInt(amount, 10);
@@ -33,7 +37,8 @@ export async function POST(req: Request) {
 
         const urls = seeds.map(seed => `https://pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${size}&height=${size}&seed=${seed}&nologo=true`);
 
-        await increaseApiLimit();
+        if(!isPro)
+            await increaseApiLimit();
 
         return NextResponse.json(urls);
     }
