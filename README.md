@@ -1,95 +1,161 @@
-# AI SaaS Web App - Personal Project
+# 🌟 Genius - Multi-Modal AI SaaS Platform
 
-Welcome to my AI-powered SaaS web app! This project is a personal endeavor, built purely out of passion for technology and a desire to explore the capabilities of modern web development and artificial intelligence.
+**Your all-in-one AI companion for chat, code, images, and music generation**  
+[![Live Website](https://img.shields.io/badge/Live_Website-313E50)](https://ai-companion-ecru.vercel.app) 
+![Next.js](https://img.shields.io/badge/Next.js-15-3A435E?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-455561?logo=typescript)
 
-## Overview
+A full-stack SaaS platform integrating **4 AI engines** into a single seamless experience, powered by Gemini, Pollinations AI, and Beatoven APIs.
 
-This project is a fully functional SaaS (Software as a Service) web application built using **Next.js**, a powerful React framework for server-rendered applications. The app leverages AI to provide four distinct functionalities:
+<div align="center">
+  <img src="public/screenshots/chat-demo.png" width="32%">
+  <img src="public/screenshots/code-gen.png" width="32%"> 
+  <img src="public/screenshots/music-ui.png" width="32%">
+</div>
 
-1. **Chatbot**: A conversational AI model that can engage in meaningful and context-aware conversations with users.
-2. **Code Generation**: An AI model that assists in generating code snippets, boilerplate code, or even complete functions based on user input.
-3. **Image Generation**: A creative AI model that generates images from textual descriptions, enabling users to create visual content effortlessly.
-4. **Music Generation**: An AI model that composes music or generates audio clips based on user input.
+---
 
-The app is deployed and accessible online, showcasing my ability to build, deploy, and maintain a modern web application with multiple AI-driven features.
+## ✨ Key Features
 
-## Key Features
+| Module          | Capabilities                          | Tech Used          |
+|-----------------|---------------------------------------|--------------------|
+| **AI Chat**     | Context-aware conversations           | Gemini Pro         |
+| **Code Gen**    | Code snippets & explanations          | Gemini Pro         |
+| **Image Gen**   | Text-to-image creation                | Pollinations AI    |
+| **Music Gen**   | AI-composed audio clips               | Beatoven AI        |
+| **Core**        | Auth, Payments, Database              | Clerk, Stripe, MongoDB |
 
-- **AI Integration**: The app integrates with **Gemini API** for chatbot and code generation, **Pollinations AI** for image generation, and **Beatoven API** for music generation, delivering intelligent and dynamic functionality across multiple domains.
-- **Responsive Design**: Built with a mobile-first approach, ensuring a seamless experience across all devices.
-- **User Authentication**: Secure user authentication implemented using **Clerk**, providing a smooth and reliable login experience.
-- **Database**: Utilizes **Prisma** with **MongoDB** as the database provider for storing user data and app-related information.
-- **Payment Integration**: Integrated **Stripe** for handling premium membership payments, enabling secure and seamless transactions.
-- **Customer Support**: Integrated **Crisp** for real-time customer chat support, ensuring users can get help whenever needed.
-- **Deployment**: Deployed on **Vercel** with CI/CD pipelines for automated updates and seamless deployment.
+**Enterprise-Ready**:  
+✔ User authentication (Clerk)  
+✔ Subscription payments (Stripe)  
+✔ Real-time customer support (Crisp)  
+✔ CI/CD deployed on Vercel  
 
-## Technologies Used
+---
 
-- **Frontend**: Next.js, React, Tailwind CSS
-- **Backend**: Next.js API routes
-- **Database**: Prisma with MongoDB as the provider
-- **Authentication**: Clerk for secure and seamless user authentication
-- **AI Integration**: Gemini API (chatbot and code generation), Pollinations AI (image generation), Beatoven API (music generation)
-- **Payment Integration**: Stripe for premium membership payments
-- **Customer Support**: Crisp for real-time customer chat support
-- **Deployment**: Vercel
-- **Version Control**: GitHub
+## 🛠 Tech Stack
 
-## Why This Project?
+**Frontend**:  
+![Next.js](https://img.shields.io/badge/Next.js-14-0C4767?logo=next.js) 
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-8A3033?logo=tailwind-css) 
+![React.js](https://img.shields.io/badge/React.js-18-566E3D?logo=react)  
 
-This project reflects my passion for building innovative and user-friendly web applications. It demonstrates my ability to:
+**Backend**:  
+![Next.js API](https://img.shields.io/badge/Next.js_API_Routes-15-823329?logo=next.js) 
+![Prisma](https://img.shields.io/badge/Prisma-274156?logo=prisma)  
+![MongoDB](https://img.shields.io/badge/MongoDB-595358?logo=mongodb)  
 
-- Work with modern web technologies like Next.js and React.
-- Integrate AI capabilities into a web application.
-- Design and implement a scalable and maintainable architecture.
-- Deploy and manage a live web application.
-- Solve real-world problems through technology.
+**Services**:  
+![Gemini API](https://img.shields.io/badge/Gemini_API-1C6E8C)  
+![Stripe](https://img.shields.io/badge/Stripe-605856?logo=stripe)  
+![Vercel](https://img.shields.io/badge/Vercel-313628?logo=vercel)  
 
-## How to Explore the App
+---
 
-The app is live and accessible at https://ai-companion-ecru.vercel.app. Feel free to explore its features and functionality.
+## 🚀 Quick Start
 
-## Installation and Local Setup
-
-If you'd like to run the app locally, follow these steps:
-
-1. **Clone the repository**:
+1. **Clone the repo**
    ```bash
    git clone https://github.com/anshul45-github/ai-companion.git
    cd ai-companion
    ```
-2. **Install dependencies**:
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
-3. **Set up environment variables**:
-   Create a **.env.local** file in the root directory and add the necessary environment variables. For example:
-   ```bash
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-   CLERK_SECRET_KEY=your_clerk_secret_key
+
+3. **Configure environment**  
+   Rename `.env.example` to `.env.local` and add your keys:
+   ```env
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+   CLERK_SECRET_KEY=sk_test_...
+
    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
-   GEMINI_API_KEY=your_gemini_api_key
-   BEATOVEN_AI_API_KEY=your_beatoven_api_key
-   DATABASE_URL="your_mongodb_connection_string"
-   STRIPE_API_KEY=your_stripe_secret_key
-   NEXT_PUBLIC_APP_URL=your_localmachine_development_url
-   STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
-   NEXT_PUBLIC_CRISP_ID="your_crisp_website_id"
+
+   GEMINI_API_KEY=your_gemini_api_key_here
+
+   BEATOVEN_AI_API_KEY=your_beatoven_ai_api_key_here
+
+   DATABASE_URL="mongodb+srv://..."
+
+   STRIPE_API_KEY=sk_test_...
+
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+   STRIPE_WEBHOOK_SECRET=whsec_...
+
+   NEXT_PUBLIC_CRISP_ID="your_crisp_id_here"
    ```
-4. **Run the development server**:
+
+4. **Run locally**
    ```bash
    npm run dev
    ```
-5. **Open the app**:
-   Visit **your_development_url** in your browser.
+   Open [http://localhost:3000](http://localhost:3000)
 
-## Contributions
-As this is a personal project, I am not actively seeking contributions. However, if you have suggestions, feedback, or ideas for improvement, feel free to open an issue on GitHub or reach out to me directly. I appreciate any input that can help make this project better!
+---
 
-## Contact
-If you have any questions, would like to discuss this project further, or are interested in collaborating, please don't hesitate to reach out:
-- **Email**: anshulmendiratta10d@gmail.com
-- **Linkedin**: https://www.linkedin.com/in/anshul-mendiratta-a49b362b0/
+## 📂 Project Architecture
+
+```
+ai-companion/
+├── .next/
+├── app/
+│   ├── (auth)/
+│   ├── (landing)/         # Landing page (unprotected)
+│   ├── (dashboard)/       # User portal (protected)
+│   ├── api/               # AI service routes
+│   │   ├── code/          # Gemini code generation endpoint
+│   │   ├── conversation/  # Gemini chat endpoint
+│   │   ├── image/         # Pollinations AI handler
+│   │   └── music/         # Beatoven API wrapper
+│   │   ├── stripe/
+│   │   ├── webhook/
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+├── components/            # Reusable UI (BotAvatar, Loader)
+├── hooks/
+├── lib/
+│   ├── api-limit.ts
+│   ├── prismadb.ts        # Prisma client
+│   ├── stripe.ts          # Stripe configs
+│   ├── subscription.ts
+│   └── utils.ts     
+├── node_modules/
+├── prisma/
+├── public/               # Static assets
+├── .env
+├── .gitignore
+├── components.json
+├── constants.ts
+├── eslint.config.mjs
+├── middleware.ts
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── README.md
+├── tailwind.config.ts    # Global tailwind config
+└── tsconfig.json         
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the project  
+2. Create your branch (`git checkout -b feature/AmazingFeature`)  
+3. Commit changes (`git commit -m 'Add feature'`)  
+4. Push (`git push origin feature/AmazingFeature`)  
+5. Open a Pull Request  
+
+---
+
+> **Note**: This project uses third-party APIs (Gemini, Beatoven). Ensure you comply with their usage policies.  
+> For questions, contact [anshulmendiratta10d@gmail.com](mailto:anshulmendiratta10d@gmail.com).
