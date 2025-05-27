@@ -99,7 +99,7 @@ A full-stack SaaS platform integrating **4 AI engines** into a single seamless e
 
 ---
 
-## 📂 Project Architecture
+## 📂 Directory Structure
 
 ```
 ai-companion/
