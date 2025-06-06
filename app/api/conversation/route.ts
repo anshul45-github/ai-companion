@@ -10,7 +10,12 @@ import { createHash } from "crypto";
 
 import { NextResponse } from "next/server";
 
-function generateCacheKey(userId: string, messages: any[], newMessage: string) {
+interface ConversationMessage {
+    role: "user" | "model";
+    parts: { text: string }[];
+}
+
+function generateCacheKey(userId: string, messages: ConversationMessage[], newMessage: string) {
   const hash = createHash('sha256');
   hash.update(JSON.stringify({ userId, messages, newMessage }));
   return `conv:${userId}:${hash.digest('hex')}`;
