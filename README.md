@@ -4,6 +4,7 @@
 [![Live Website](https://img.shields.io/badge/Live_Website-313E50)](https://ai-companion-ecru.vercel.app) 
 ![Next.js](https://img.shields.io/badge/Next.js-15-3A435E?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-455561?logo=typescript)
+![Redis](https://img.shields.io/badge/Redis-Caching-3E873A?logo=redis)
 
 A full-stack SaaS platform integrating **4 AI engines** into a single seamless experience, powered by Gemini, Pollinations AI, and Beatoven APIs.
 

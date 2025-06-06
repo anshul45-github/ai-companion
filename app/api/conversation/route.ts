@@ -1,11 +1,20 @@
 import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
+import { redis } from "@/lib/cache";
 import { checkSubscription } from "@/lib/subscription";
 
 import { auth } from "@clerk/nextjs/server";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+import { createHash } from "crypto";
+
 import { NextResponse } from "next/server";
+
+function generateCacheKey(userId: string, messages: any[], newMessage: string) {
+  const hash = createHash('sha256');
+  hash.update(JSON.stringify({ userId, messages, newMessage }));
+  return `conv:${userId}:${hash.digest('hex')}`;
+}
 
 export async function POST(req: Request) {
     try {
@@ -37,14 +46,29 @@ export async function POST(req: Request) {
         if(!freeTrial && !isPro)
             return new NextResponse("Free trial has expired", { status: 403 });
 
-        const chat = model.startChat({ history: messages });
-        
-        const result = await chat.sendMessage(newMessage);
+        const cacheKey = generateCacheKey(userId, messages, newMessage);
+        const cachedResponse = await redis.get(cacheKey);
 
-        if(!isPro)
+        if (cachedResponse) {
+          const headers = new Headers();
+          headers.set('X-Cache-Hit', 'true');
+          return new NextResponse(String(cachedResponse), { headers });
+        }
+
+        const chat = model.startChat({ history: messages });
+        const result = await chat.sendMessage(newMessage);
+        const responseText = result.response.text();
+
+        await redis.setex(
+          cacheKey,
+          isPro ? 3600 : 600, // Pro: 1 hour, Free: 10 minutes
+          responseText
+        );
+
+        if(!cachedResponse && !isPro)
             await increaseApiLimit();
 
-        return NextResponse.json(result.response.text());
+        return NextResponse.json(responseText);
     }
     catch(error) {
         console.log("[CONVERSATION_ERROR]", error);
