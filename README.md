@@ -1,6 +1,6 @@
 # 🌟 Genius - Multi-Modal AI SaaS Platform
 
-**Your all-in-one AI companion for chat, code, images, and music generation**  
+**Built as a production-grade SaaS app with authentication, subscriptions, and scalable AI integrations tested by multiple users.**  
 [![Live Website](https://img.shields.io/badge/Live_Website-313E50)](https://ai-companion-ecru.vercel.app) 
 ![Next.js](https://img.shields.io/badge/Next.js-15-3A435E?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-455561?logo=typescript)
@@ -16,14 +16,20 @@ A full-stack SaaS platform integrating **4 AI engines** into a single seamless e
 
 ---
 
+## Why this project?
+
+The goal was to consolidate multiple AI use-cases (chat, code, media) into one SaaS platform to demonstrate full-stack product engineering and practical API integration.
+
+---
+
 ## ✨ Key Features
 
 | Module          | Capabilities                          | Tech Used          |
 |-----------------|---------------------------------------|--------------------|
-| **AI Chat**     | Context-aware conversations           | Gemini Pro         |
-| **Code Gen**    | Code snippets & explanations          | Gemini Pro         |
-| **Image Gen**   | Text-to-image creation                | Pollinations AI    |
-| **Music Gen**   | AI-composed audio clips               | Beatoven AI        |
+| **AI Chat**     | Provides contextual responses for real-time Q&A          | Gemini Flash         |
+| **Code Gen**    | Code snippets & explanations          | Gemini Flash         |
+| **Image Gen**   | Generates unique artwork from text prompts within seconds                | Pollinations AI    |
+| **Music Gen**   | Composes background scores for content creators               | Beatoven AI        |
 | **Core**        | Auth, Payments, Database              | Clerk, Stripe, MongoDB |
 
 **Enterprise-Ready**:  
@@ -155,6 +161,13 @@ ai-companion/
 3. Commit changes (`git commit -m 'Add feature'`)  
 4. Push (`git push origin feature/AmazingFeature`)  
 5. Open a Pull Request  
+
+---
+
+## 📬 Contact
+
+- Email: [anshulmendiratta10d@gmail.com](mailto:anshulmendiratta10d@gmail.com)  
+- LinkedIn: [Anshul Mendiratta](https://www.linkedin.com/in/anshul-mendiratta/)  
 
 ---
 
